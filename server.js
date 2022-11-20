@@ -20,6 +20,7 @@ const bree = new Bree({
       name: 'student-pay-near',
       interval: '5m'
     },
+
     // --- Student Engagement Awards - Extra Credit --- \\
     {
       name: 'daily-xtr-credit',
@@ -37,6 +38,7 @@ const bree = new Bree({
       name: 'yearly-xtr-credit',
       cron: '0 1 1 1 *' // At 01:00 AM on Jan 1
     },
+
   ]
 });
 

@@ -8,7 +8,11 @@ Enter your private key in `.env`
 
 Set options in `teacher-settings.js`
 
-Run node start to start the script. [Bree](https://www.npmjs.com/package/bree) will keep it running in the background
+Run `npm start` or `node server.js` to start the script. [Bree](https://www.npmjs.com/package/bree) will keep it running in the background
+
+# Payment Schedule
+
+Adjust when you pay students in `node server.js`. By default, submitted quizzes are checked every 5 minutes, and xtra credit is active.
 
 ## Payment Options
 
