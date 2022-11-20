@@ -1,4 +1,9 @@
-# NEAR JavaScript SDK
+# NEAR Learn 2 Earn Tools
+
+## Compatibility
+- Wordpress 
+- Learndash 3.5+
+- NEAR blockchain
 
 ## Quick Start
 
@@ -53,10 +58,7 @@ Try different options in [Teacher Settings](teacher-settings.js) and further mod
 ```
 
 
-## Compatibility
-- Wordpress 
-- Learndash 3.5+
-- NEAR blockchain
+
 
 > WARNING
 > This code isn't (yet) intended to be used on mainnet
