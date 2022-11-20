@@ -9,8 +9,6 @@
 
 Run `npm install` from the main directory the terminal
 
-Enter your private key in `.env`
-
 Set options in `teacher-settings.js`
 
 Run `npm start` or `node server.js` to start the script. [Bree](https://www.npmjs.com/package/bree) will keep it running in the background
@@ -57,8 +55,8 @@ Try different options in [Teacher Settings](teacher-settings.js) and further mod
 },
 ```
 
-
-
+# Demo as a Student on [Tetra.earth](https://tetra.earth)
+Using [AQUA](https://explorer.testnet.near.org/transactions/CieWtmTgRjuJkpLgB4pNx26jbTjbDBUndqcBJE4UFvyL) token
 
 > WARNING
 > This code isn't (yet) intended to be used on mainnet
