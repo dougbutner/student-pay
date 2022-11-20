@@ -4,6 +4,12 @@
 
 Run `npm install` from the main directory the terminal
 
+Enter your private key in `.env`
+
+Set options in `teacher-settings.js`
+
+Run node start to start the script. [Bree](https://www.npmjs.com/package/bree) will keep it running in the background
+
 ## Payment Options
 
 Choose how to reward students in `teacher-settings.js`
@@ -31,7 +37,7 @@ const students = [ // "wordpress_account_name":"wallet.near"
 
 ## Extra Credit
 
-Give your students extra credit by applying the fibonacci series on the amount of points each student got during the week. 
+Give your students extra credit by points earned during a day, week, month, year, or all of these in tandem.
 
 Try different options in [Teacher Settings](teacher-settings.js) and further modify the equations on the individual payments directly in `/jobs`
 
@@ -41,6 +47,12 @@ Try different options in [Teacher Settings](teacher-settings.js) and further mod
   interval: 'at 2:00 pm' // Everyday
 },
 ```
+
+
+## Compatibility
+- Wordpress 
+- Learndash 3.5+
+- NEAR blockchain
 
 > WARNING
 > This code isn't (yet) intended to be used on mainnet
