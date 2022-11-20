@@ -1,15 +1,6 @@
 
 const { parentPort } = require('worker_threads');
 
-const { Api, JsonRpc, RpcError } = require('eosjs');
-const { JsSignatureProvider } = require('eosjs/dist/eosjs-jssig');      // development only
-const fetch = require('node-fetch');                                    // node only; not needed in browsers
-const { TextEncoder, TextDecoder } = require('util');                   // node only; native TextEncoder/Decoder
-
-const defaultPrivateKey = process.env.CXC_ASSETS; // thx4dapurple blux Main net
-const signatureProvider = new JsSignatureProvider([defaultPrivateKey]);
-const rpc = new JsonRpc('https://wax.greymass.com', { fetch });
-const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() });
 
 // --- Custom Classes --- \\
 const Bagman = require('../bagman.js');
@@ -21,9 +12,6 @@ require('dotenv').config();
 // --- Get API --- \\
 const https = require('https');
 const axios = require('axios').default;
-
-
-
 
 // --- Timmy Varibles --- \\
 peeps = [];
