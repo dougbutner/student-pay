@@ -1,19 +1,23 @@
-# NEAR Learn 2 Earn Tools
+# NEAR Learn 2 Earn Tools 🍏
 
-## Compatibility
+## Compatibility ✅
 - Wordpress 
 - Learndash 3.5+
 - NEAR blockchain
 
-## Quick Start
+## Quick Start 🛠
 
 Run `npm install` from the main directory the terminal
 
 Set options in `teacher-settings.js`
 
-Run `npm start` or `node server.js` to start the script. [Bree](https://www.npmjs.com/package/bree) will keep it running in the background
+Duplicate + modify a [bree job](https://github.com/breejs/bree) starting from `template.mjs` to fit your needs, and test. 
 
-# Payment Schedule
+Then, uncomment schedules from `server.js` to fit your needs and 
+
+Run `npm start` or `node server.js` to start the script. [Bree](https://www.npmjs.com/package/bree) will keep it running in the background according to the schedules set up in `server.js`.
+
+# Payment Schedule 💸
 
 Adjust when you pay students in `node server.js`. By default, submitted quizzes are checked every 5 minutes, and xtra credit is active.
 
@@ -21,9 +25,9 @@ Adjust when you pay students in `node server.js`. By default, submitted quizzes 
 
 Choose how to reward students in `teacher-settings.js`
 
-## Student Requirements
+## Student Requirements 👩‍🎓
 
-You'll need a NEAR address and a Wordpress login to a Learndash school.
+Students each need a NEAR address and a Wordpress login to a Learndash school.
 
 > More LMS integrations coming soon
 
@@ -36,7 +40,7 @@ Or, manually enter each student in `teacher-settings.js` to ensure only approved
 // --- Implementing a Manual Student List --- \\
 
 const students = [ // "wordpress_account_name":"wallet.near"
-  "douglas":"goudasol.near",
+  "douglas":"godsol.near",
   "sonny":"sonnylife.near"
 ];
 
@@ -55,8 +59,19 @@ Try different options in [Teacher Settings](teacher-settings.js) and further mod
 },
 ```
 
-# Demo as a Student on [Tetra.earth](https://tetra.earth)
-Using [AQUA](https://explorer.testnet.near.org/transactions/CieWtmTgRjuJkpLgB4pNx26jbTjbDBUndqcBJE4UFvyL) token
+# Demo as a Student on [Tetra.earth](https://tetra.earth/learn2earn)
+Using [AQUA Token on Testnet](https://explorer.testnet.near.org/transactions/CieWtmTgRjuJkpLgB4pNx26jbTjbDBUndqcBJE4UFvyL) 
+
+## Passwords for quizzes
+Perma design - permaperfect
+Bio-regeneration - natureknowsbest
+
+## Free plugins
+You can set up a L2E system using completely free plugins.
+Learn how to [get your user's Near account into Wordpress the free and easy web 2.0 way](https://www.youtube.com/watch?v=-fHRpTUnQRM), and explore closed- and IRL-school focused manual input options in [teacher-settings.js](teacher-settings.js). 
+
+
+> ✨ This repo uses [FRESH Commenting Syntax](https://github.com/dougbutner/FRESH)
 
 > WARNING
 > This code isn't (yet) intended to be used on mainnet
