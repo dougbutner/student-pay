@@ -1,10 +1,4 @@
-
 const { parentPort } = require('worker_threads');
-
-
-// --- Custom Classes --- \\
-const Bagman = require('../bagman.js');
-const Chipper = require('../chipper.js');
 
 // --- Security --- \\
 require('dotenv').config();
@@ -13,35 +7,41 @@ require('dotenv').config();
 const https = require('https');
 const axios = require('axios').default;
 
-// --- Timmy Varibles --- \\
-peeps = [];
-neededCollectionNum = 6;
-templateId = 272347;
-chipCount = 1; 
+// --- Set up Teacher --- \\
+require('../teacher-settings.js'); // Bring in settings
+require('../teacher-auth.js'); // Activates AuthTeacher()
 
-const promPeeps = new Promise((resolve, reject) => {
-  
-  // --- Get the Holders NFTs from the API --- \\
-  let aaurl = 'https://wax.api.atomicassets.io/atomicassets/v1/accounts';//?collection_name=cxcmusicnfts&hide_offers=true&collection_whitelist=cxcmusicnfts&page=1&limit=99&order=desc';
-  let aadata = {
-    collection_name:"cxcmusicnfts",
-    collection_whitelist:"cxcmusicnfts",
-    hide_offers:true,
-    page:1,
-    limit:100,
-    order:"asc"
+
+// --- Learn 2 Earn Varibles --- \\
+
+
+// --- Get teacher authentication token --- \\
+const auth_wp_url = `${school_domain}/wp-json/jwt-auth/v1/token`;
+const teacher_token = AuthTeacher();
+axios.post(url, {
+}, {
+  headers: {
+    'Authorization': `Basic ${teacher_token}` 
   }
-  aaurl="https://wax.api.atomicassets.io/atomicassets/v1/accounts?collection_whitelist=cxcmusicnfts&page=2&limit=100&order=asc"
+})
+
+
+const promStudents = new Promise((resolve, reject) => {
+  // --- Get the Quizzes --- \\
+  let quiz_get_url = `${school_domain}/wp-json/ldlms/v2/sfwd-quiz`;
 
   axios({
     method: 'get',
-    url: aaurl,
-    data:aadata
+    url:quiz_get_url,
+  //  data:data,
+    headers:{
+      'Authorization': `Basic ${teacher_token}` 
+    }
   })
     .then(function (response) {
 
-      console.log("response.data.length", response.data.data.length);
-
+      console.log("response", response);
+/*/
       for (var i=0, n=response.data.data.length; i < n; ++i){ //Loop Through Holders
         let holder = response.data.data[i];
         if (parseInt(holder.assets) >= neededCollectionNum){
@@ -59,12 +59,15 @@ const promPeeps = new Promise((resolve, reject) => {
         
       }//END Holder Getter  loop        
               resolve(peeps);
+              
+              /*/
+              resolve(response);
     }).catch(function (error) {
       // handle error
       console.log(error);
     });//END axios final
 
-});//END Promise promPeeps
+});//END Promise promStudents
 
 
   
@@ -73,7 +76,7 @@ promPeeps.then((peeps) =>{
 
 let batch = [];
 
-
+/*/
 peeps.forEach(function (item, index) {
   
   console.log(item[1] + " has "+ item[0] + " NFTs.");
@@ -88,12 +91,9 @@ peeps.forEach(function (item, index) {
   });
 });
 
+/*/
 
-//console.log("batch", batch);
 
-    
-    
-    delete len, chipCount, peeps;
         
     return true;
 }).catch(err => { console.log(err)});
