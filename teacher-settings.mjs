@@ -1,25 +1,31 @@
 // === TEACHER SETTINGS === \\
 
-const existing_studentlist = true; //Set for demo, default is false
-const studentlist_type = "students"; // 
+export const existing_studentlist = true; //Set for demo, default is false
+export const studentlist_type = "students"; // 
+export const school_domain = "https://tetra.earth/wp-json"; // API-base according to your WP routing. Do not include ending "/"
+export const teacher_near_account = "teacher.aquatoken.near"; 
 
 // --- Unit per correct answer --- \\
-const correct_pay = 1;
+export const correct_pay = 1;
 
 // --- Unit per incorrect answer --- \\
-const incorrect_pay = 0;
+export const incorrect_pay = 0;
 
 // --- Unit per quiz started --- \\
-const start_pay = 0;
+export const start_pay = 0;
 
 // --- Unit per quiz finished --- \\
-const finish_pay = 0;
+export const finish_pay = 0;
 
 // --- Set to "private_key" or "browser" for payment authentication pathways --- \\
-const teacher_key_type = "private_key"; //REMIND Add PK in .env or in terminal as TEACHER_KEY={private key holding payment token}
+export const teacher_key_type = "private_key"; //REMIND Add PK in .env or in terminal as TEACHER_KEY={private key holding payment token}
 
 
-/*/ About Leatndash + NEAR integration
+// --- Choose to pay some or all quizzes --- \\
+
+let paying_quizzes = []; // Pays all, else use ["<courseid>"] 
+
+/*/ About Learndash + NEAR integration
 
 Collecting Student's NEAR accounts manually or via automatic Email integration 
 1. Manually imput the username and the near account of the student
@@ -34,7 +40,7 @@ Collecting Student's NEAR accounts manually or via automatic Email integration
   Doesn't require collecting NEAR account name on registration 
 
 /*/
-const students = { // "wordpress_account_name":"wallet.near"
+export const students = { // "wordpress_account_name":"wallet.near"
   "douglas":"godsol.near",
   "sonny":"sonnylife.near",
   "gudasol":"gudasol.near"
@@ -47,7 +53,9 @@ const students = { // "wordpress_account_name":"wallet.near"
   on Wordpress. 
   Students input NEAR account name on signup
 
-/*/
-const students_email = [
+
+export const students_email = {
   "dougbutner@gmail.com", "ammonthewind@gmail.com"
-]
+};
+
+/*/
