@@ -1,5 +1,19 @@
 
-const { KeyPairEd25519, KeyPair, keyStores, connections } = require('rear-api-js');
+/*/
+This concept was temporarily abandoned, but can be finished and added back when needed
+
+/*/
+
+import { KeyPairEd25519, KeyPair, keyStores, connections } from near-api-js;
+
+
+
+
+
+const fs = require("fs");
+const path = require("path");
+const homedir = require("os").homedir();
+
 require('teacher-settings.js');
 
 // === Handle authentication for Teachers === \\
@@ -7,8 +21,10 @@ class Teacher {
   constructor(account_id, auth_type = teacher_key_type){ // Pass in setting for key authentication type
     this.auth_type = auth_type;
     this.account_id = false; 
+    
   }
   
+
   
 
 
