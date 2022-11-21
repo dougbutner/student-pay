@@ -5,6 +5,11 @@
 - Learndash 3.5+
 - NEAR blockchain
 
+# Demo Student Experience with Test Courses 👨‍💻
+
+## [🏡 Permaculture Site Design](https://tetra.earth/learn2earn/permaculture-site-design/)
+## [🌳 Regenerative Practices](https://tetra.earth/learn2earn/bio-regenerative-practices/)
+
 ## Quick Start 🛠
 
 Run `npm install` from the main directory the terminal
@@ -60,6 +65,8 @@ Try different options in [Teacher Settings](teacher-settings.js) and further mod
 ```
 
 # Demo as a Student on [Tetra.earth](https://tetra.earth/learn2earn)
+
+
 Using [AQUA Token on Testnet](https://explorer.testnet.near.org/transactions/CieWtmTgRjuJkpLgB4pNx26jbTjbDBUndqcBJE4UFvyL) 
 
 ## Passwords for quizzes
@@ -70,6 +77,10 @@ Bio-regeneration - natureknowsbest
 You can set up a L2E system using completely free plugins.
 Learn how to [get your user's Near account into Wordpress the free and easy web 2.0 way](https://www.youtube.com/watch?v=-fHRpTUnQRM), and explore closed- and IRL-school focused manual input options in [teacher-settings.js](teacher-settings.js). 
 
+### METABUILD III Notes
+Working parts: payment scheduler, and full frontend solution [demo](https://tetra.earth/learn2earn)
+Needed work: finish and test the API connections in the job template `template.mjs` 
+Note: A new job must be created from the template.mjs file for each payment type scheduled
 
 > ✨ This repo uses [FRESH Commenting Syntax](https://github.com/dougbutner/FRESH)
 
