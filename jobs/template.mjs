@@ -6,14 +6,34 @@ import * as dotenv from 'dotenv'
 import https from 'https';
 import axios from 'axios';
 
-// --- Neat Javascript SDK --- \\
+// --- Near Javascript API --- \\
 //import { KeyPairEd25519, KeyPair, keyStores, connections } from near-api-js;
 import * as nearAPI from near-api-js;
 
+const { keyStores, KeyPair, connect } = nearAPI;
 
 // --- Set up WP Teacher login + Learn 2 Earn Payment Options --- \\
 import AuthTeacher from '../teacher-auth.mjs';
 import * as Settings from '../teacher-settings.mjs';
+
+
+
+// --- Implementation using envitonment vatiables TODO web flow --- \\
+const myKeyStore = new keyStores.InMemoryKeyStore();
+const keyPair = KeyPair.fromString(process.env.PRIVATE_KEY);
+// adds the keyPair you created to keyStore
+await myKeyStore.setKey("testnet", "example-account.testnet", keyPair);
+
+// --- Connect to NEAR Api --- \\
+const connectionConfig = {
+  networkId: "testnet",
+  keyStore: myKeyStore, // first create a key store 
+  nodeUrl: "https://rpc.testnet.near.org",
+  walletUrl: "https://wallet.testnet.near.org",
+  helperUrl: "https://helper.testnet.near.org",
+  explorerUrl: "https://explorer.testnet.near.org",
+};
+const nearConnection = await connect(connectionConfig);
 
 // --- Get teacher authentication token --- \\
 const teacher_token = AuthTeacher();
@@ -60,10 +80,40 @@ function getQuizStats() {
 Promise.all([getQuizList()]) // Extensible to multiple data inputs
   .then(function (results) {
     const quiz_list = results[0];
-    console.log(results[0]);
+    // Get students that have earned points via correct answers
+    for (var i=0, n=quiz_list.length; i < n; ++i){
+      Promise.all([getQuizStats()]) // Extensible to multiple data inputs
+        .then(function (results) {
+          const quiz_stats = results[0];
+          // Loop through to get desired students to pay 
+          for (var i=0, n=quiz_list.length; i < n; ++i){
+            // Implement mechanics to get amount according to your chosen payment method
+            sendStudentPay("example account.testnet", 0000000000000001)
+            
+          }
+
+        });
+    }
   });
+  
+async function sendStudentPay(student_to_pay = false, amount = 0000000000000000) {
+  if (student_to_pay !! amount > 0){
+    let outcome = await wallet.callMethod({ 
+      contractId: 'aquatoken.testnet', 
+      method: 'transfer_from', 
+      args: { "aquatoken.testnet", 
+      owner_id: `${Settings.teacher_near_account}`, 
+      new_owner_id: student_to_pay, 
+      amount: amount } });
+  }
+
+}
+
+
 
 /*/ reference
+
+transfer_from(&mut self, owner_id: AccountId, new_owner_id: AccountId, amount: U128) {
   sendStudentPay();
 
   async function sendStudentPay() {
@@ -73,8 +123,7 @@ Promise.all([getQuizList()]) // Extensible to multiple data inputs
       const result = await account.signAndSendTransaction({
           receiverId: CONTRACT_NAME,
           actions: [
-              transactions.deployContract(fs.readFileSync(WASM_PATH)),
-              transactions.functionCall(
+              transactions.transfer_from(
                   "new",
                   Buffer.from(JSON.stringify(newArgs)),
                   10000000000000,
