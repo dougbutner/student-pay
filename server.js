@@ -12,10 +12,10 @@ const bree = new Bree({
     
     // --- Status Log for Teacher --- \\
     {
-      name: 'api-test',
-      timeout: '0'
+      name: 'template.mjs',
+      timeout: 0
     },
-    // --- Quiz Completion Drops --- \\
+    /*/ --- Quiz Completion Drops --- \\
     {
       name: 'student-pay-near',
       interval: '5m'
@@ -38,6 +38,7 @@ const bree = new Bree({
       name: 'yearly-xtr-credit',
       cron: '0 1 1 1 *' // At 01:00 AM on Jan 1
     },
+    /*/
 
   ]
 });
