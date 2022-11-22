@@ -5,6 +5,11 @@ export const studentlist_type = "students"; //
 export const school_domain = "https://tetra.earth/wp-json"; // API-base according to your WP routing. Do not include ending "/"
 export const teacher_near_account = "teacher.aquatoken.near"; 
 
+export const excluded_quizes = [];
+
+export const included_quizes = [];
+
+
 // --- Unit per correct answer --- \\
 export const correct_pay = 1;
 

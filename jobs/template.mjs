@@ -16,8 +16,6 @@ const { keyStores, KeyPair, connect } = nearAPI;
 import AuthTeacher from '../teacher-auth.mjs';
 import * as Settings from '../teacher-settings.mjs';
 
-
-
 // --- Implementation using envitonment vatiables TODO web flow --- \\
 const myKeyStore = new keyStores.InMemoryKeyStore();
 const keyPair = KeyPair.fromString(process.env.PRIVATE_KEY);
@@ -46,8 +44,13 @@ const headers_auth = {
 };
 
 // --- Learndash Api Endpoints Used --- \\
-const quiz_stats_url = `${Settings.school_domain}/ldlms/v2/sfwd-quiz/1965/statistics`;
 const quiz_wp_url = `${Settings.school_domain}/ldlms/v2/sfwd-quiz`;
+const quiz_stats_url = `${Settings.school_domain}/ldlms/v2/sfwd-quiz/1965/statistics`; //TODO finish this 
+
+
+function make_quiz_stats_url(quiz_id){
+  return `${Settings.school_domain}/ldlms/v2/sfwd-quiz/${quiz_id}/statistics`;
+}
 
 
 // --- Example of Quiz Statitics endpoint --- \\
@@ -67,7 +70,8 @@ function getQuizList() {
 }//END getQuizList()
 
 // --- Get the Stats of one Quiz --- \\
-function getQuizStats() {
+function getQuizStats(quiz_id) {
+  
   try{
     return axios.get(
       quiz_stats_url, 
@@ -79,10 +83,21 @@ function getQuizStats() {
 // --- Starting Point --- \\
 Promise.all([getQuizList()]) // Extensible to multiple data inputs
   .then(function (results) {
-    const quiz_list = results[0];
+    const all_quizes = results[0]; //TODO Find array of int/string quiz ids HINT look at endpoint to find real location
+    
+    let quiz_list = [];
+    
+    //Filter through excluded_quizes
+    
+    //Filter through included_quizes
+
+    // --- Filter Quiz Results for Desired IDs --- \\
+    
+    //WARN be sure that there's not a implicitly linked quiz that is included again from API
+    
     // Get students that have earned points via correct answers
     for (var i=0, n=quiz_list.length; i < n; ++i){
-      Promise.all([getQuizStats()]) // Extensible to multiple data inputs
+      Promise.all([getQuizStats(quiz_id)]) // Extensible to multiple data inputs
         .then(function (results) {
           const quiz_stats = results[0];
           // Loop through to get desired students to pay 
