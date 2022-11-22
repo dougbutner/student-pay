@@ -17,25 +17,25 @@ const bree = new Bree({
     },
     /*/ --- Quiz Completion Drops --- \\
     {
-      name: 'student-pay-near',
+      name: 'student-pay-near.mjs',
       interval: '5m'
     },
 
     // --- Student Engagement Awards - Extra Credit --- \\
     {
-      name: 'daily-xtr-credit',
+      name: 'daily-xtr-credit.mjs',
       interval: 'at 2:00 pm' // Everyday
     },
     { 
-      name: 'weekly-xtr-credit',
+      name: 'weekly-xtr-credit.mjs',
       cron: '30 3 * * 7' // Mondays at 7:30 AM 
     },
     { 
-      name: 'monthly-xtr-credit',
+      name: 'monthly-xtr-credit.mjs',
       cron: '24 7 1 * *' // At 7:24 AM on first of each month
     },
     { 
-      name: 'yearly-xtr-credit',
+      name: 'yearly-xtr-credit.mjs',
       cron: '0 1 1 1 *' // At 01:00 AM on Jan 1
     },
     /*/
