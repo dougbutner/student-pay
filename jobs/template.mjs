@@ -10,17 +10,20 @@ import axios from 'axios';
 //import { KeyPairEd25519, KeyPair, keyStores, connections } from near-api-js;
 import * as nearAPI from near-api-js;
 
-const { keyStores, KeyPair, connect } = nearAPI;
+const { keyStores, KeyPair, connect, KeyPairEd25519, connections } = nearAPI;
 
-// --- Set up WP Teacher login + Learn 2 Earn Payment Options --- \\
+// --- Set up WP Teacher login + Learn 2 Earn Payment Options --- \\ 
 import AuthTeacher from '../teacher-auth.mjs';
 import * as Settings from '../teacher-settings.mjs';
 
-// --- Implementation using envitonment vatiables TODO web flow --- \\
+// --- Implementation using envitonment vatiables TODO web flow --- \\ 
 const myKeyStore = new keyStores.InMemoryKeyStore();
 const keyPair = KeyPair.fromString(process.env.PRIVATE_KEY);
 // adds the keyPair you created to keyStore
-await myKeyStore.setKey("testnet", "example-account.testnet", keyPair);
+
+(async () => {
+	await myKeyStore.setKey("testnet", "teacher.aquatoken.testnet", keyPair);
+})();
 
 // --- Connect to NEAR Api --- \\
 const connectionConfig = {
@@ -31,7 +34,12 @@ const connectionConfig = {
   helperUrl: "https://helper.testnet.near.org",
   explorerUrl: "https://explorer.testnet.near.org",
 };
-const nearConnection = await connect(connectionConfig);
+
+
+const nearConnection = (async () => {
+	await connect(connectionConfig);
+})();
+
 
 // --- Get teacher authentication token --- \\
 const teacher_token = AuthTeacher();
@@ -43,45 +51,54 @@ const headers_auth = {
   'Authorization': teacher_jwt
 };
 
-// --- Learndash Api Endpoints Used --- \\
+/*/ --- Learndash Api Endpoints Setup --- \\
+Example of Quiz Statitics endpoint 
+Docs: https://developers.learndash.com/rest-api/v2/v2-quiz-statistics/
+/*/
 const quiz_wp_url = `${Settings.school_domain}/ldlms/v2/sfwd-quiz`;
 const quiz_stats_url = `${Settings.school_domain}/ldlms/v2/sfwd-quiz/1965/statistics`; //TODO finish this 
-
 
 function make_quiz_stats_url(quiz_id){
   return `${Settings.school_domain}/ldlms/v2/sfwd-quiz/${quiz_id}/statistics`;
 }
 
-
-// --- Example of Quiz Statitics endpoint --- \\
-// Docs: https://developers.learndash.com/rest-api/v2/v2-quiz-statistics/
 const quiz_stats_params = {
   headers:headers_auth,
-    id:"1965",
+  id:"1965",
 }
 
+const quiz_list_params = {
+  headers:headers_auth
+}
+
+
 // --- Get the List of Quizzes --- \\
-function getQuizList() {
+async function getQuizList(url, params) {
   try{
-    return axios.get (
-      quiz_wp_url
+    return await axios.get (
+      url,
+      params
     );
   } catch (err => { console.log(err)})
 }//END getQuizList()
 
 // --- Get the Stats of one Quiz --- \\
-function getQuizStats(quiz_id) {
-  
+async function getQuizStats(url, params) {
   try{
-    return axios.get(
-      quiz_stats_url, 
-      quiz_stats_params
+    return await axios.get(
+      url, 
+      params
     );
     } catch (err => { console.log(err)});
 }//END getQuizStats()
 
+
+
+
+
+/*/
 // --- Starting Point --- \\
-Promise.all([getQuizList()]) // Extensible to multiple data inputs
+Promise.all([getQuizList(quiz_wp_url, quiz_list_params)]) // Extensible to multiple data inputs
   .then(function (results) {
     const all_quizes = results[0]; //TODO Find array of int/string quiz ids HINT look at endpoint to find real location
     
@@ -109,7 +126,9 @@ Promise.all([getQuizList()]) // Extensible to multiple data inputs
 
         });
     }
-  });
+  });//END Promise.all 
+  
+  /*/
   
 async function sendStudentPay(student_to_pay = false, amount = 0000000000000000) {
   if (student_to_pay !! amount > 0){
@@ -119,9 +138,9 @@ async function sendStudentPay(student_to_pay = false, amount = 0000000000000000)
       args: { "aquatoken.testnet", 
       owner_id: `${Settings.teacher_near_account}`, 
       new_owner_id: student_to_pay, 
-      amount: amount } });
+      amount: amount } 
+    });
   }
-
 }
 
 
