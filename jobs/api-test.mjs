@@ -6,43 +6,17 @@ import * as dotenv from 'dotenv'
 import https from 'https';
 import axios from 'axios';
 
-// --- Near Javascript API --- \\
-//import { KeyPairEd25519, KeyPair, keyStores, connections } from near-api-js;
-import * as nearAPI from near-api-js;
-
-const { keyStores, KeyPair, connect, KeyPairEd25519, connections } = nearAPI;
 
 // --- Set up WP Teacher login + Learn 2 Earn Payment Options --- \\ 
 import AuthTeacher from '../teacher-auth.mjs';
 import * as Settings from '../teacher-settings.mjs';
 
-// --- Implementation using envitonment vatiables TODO web flow --- \\ 
-const myKeyStore = new keyStores.InMemoryKeyStore();
-const keyPair = KeyPair.fromString(process.env.PRIVATE_KEY);
-// adds the keyPair you created to keyStore
-
-(async () => {
-	return await myKeyStore.setKey("testnet", "teacher.aquatoken.testnet", keyPair);
-})();
-
-// --- Connect to NEAR Api --- \\
-const connectionConfig = {
-  networkId: "testnet",
-  keyStore: myKeyStore, // first create a key store 
-  nodeUrl: "https://rpc.testnet.near.org",
-  walletUrl: "https://wallet.testnet.near.org",
-  helperUrl: "https://helper.testnet.near.org",
-  explorerUrl: "https://explorer.testnet.near.org",
-};
-
-
-const nearConnection = (async () => {
-	return await connect(connectionConfig);
-})();
-
-
 // --- Get teacher authentication token --- \\
-const teacher_token = AuthTeacher();
+
+const teacher_token = (async () => {
+	return await AuthTeacher();
+})();
+
 
 const teacher_jwt = `Basic ${teacher_token}`;
 
@@ -56,10 +30,11 @@ Example of Quiz Statitics endpoint
 Docs: https://developers.learndash.com/rest-api/v2/v2-quiz-statistics/
 /*/
 const quiz_wp_url = `${Settings.school_domain}/ldlms/v2/sfwd-quiz`;
-const quiz_stats_url = `${Settings.school_domain}/ldlms/v2/sfwd-quiz/1965/statistics`; //TODO finish this 
+quiz_stats_url = `${Settings.school_domain}/ldlms/v2/sfwd-quiz/1965/statistics`; //TODO finish this 
 
 function make_quiz_stats_url(quiz_id){
-  return `${Settings.school_domain}/ldlms/v2/sfwd-quiz/${quiz_id}/statistics`;
+	quiz_stats_url = `${Settings.school_domain}/ldlms/v2/sfwd-quiz/${quiz_id}/statistics`;
+  return quiz_stats_url;
 }
 
 const quiz_stats_params = {
@@ -72,6 +47,9 @@ const quiz_list_params = {
 }
 
 
+console.log(getQuizList(quiz_wp_url, quiz_list_params));
+
+
 // --- Get the List of Quizzes --- \\
 async function getQuizList(url, params) {
   try{
@@ -79,6 +57,7 @@ async function getQuizList(url, params) {
       url,
       params
     );
+		
   } catch (err => { console.log(err)})
 }//END getQuizList()
 
@@ -129,7 +108,7 @@ Promise.all([getQuizList(quiz_wp_url, quiz_list_params)]) // Extensible to multi
   });//END Promise.all 
   
   /*/
-  
+  /*/
 async function sendStudentPay(student_to_pay = false, amount = 0000000000000000) {
   if (student_to_pay !! amount > 0){
     let outcome = await wallet.callMethod({ 
@@ -142,7 +121,7 @@ async function sendStudentPay(student_to_pay = false, amount = 0000000000000000)
     });
   }
 }
-
+/*/
 
 
 /*/ reference

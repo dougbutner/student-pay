@@ -21,12 +21,8 @@ class Teacher {
   constructor(account_id, auth_type = teacher_key_type){ // Pass in setting for key authentication type
     this.auth_type = auth_type;
     this.account_id = false; 
-    
   }
   
-
-  
-
 
 // === === \\ 
 
