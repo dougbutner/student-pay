@@ -87,3 +87,6 @@ Note: A new job must be created from the template.mjs file for each payment type
 > WARNING
 > This code isn't (yet) intended to be used on mainnet
 > Use at your own risk with real tokens
+
+> METABUILD JUDGES
+> Please see [METABUILD.md](METABUILD.md) for a summary of project status
