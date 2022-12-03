@@ -16,6 +16,16 @@ Run `npm install` from the main directory the terminal
 
 Set options in `teacher-settings.js`
 
+Pass in environment variables in terminal, or add them to the .env file
+
+> The current version requires your private key to be able to run NEAR transactions in the background
+
+```js
+PRIVATE_KEY=2u4exampleirhc1x342345523nqwpeoy7hhecuacnp97rg92mx4hqiuqwrg34
+WP_ADMIN_EMAIL=example@gmail.com
+WP_ADMIN_PASSWORD=urpassword123
+```
+
 Duplicate + modify a [bree job](https://github.com/breejs/bree) starting from `template.mjs` to fit your needs, and test. 
 
 Then, uncomment schedules from `server.js` to fit your needs and 
