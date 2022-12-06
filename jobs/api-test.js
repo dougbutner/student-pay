@@ -14,7 +14,7 @@ import * as settings from "../teacher-settings.js";
 // --- Get teacher authentication token --- \\
 
 const teacher_token = (async function(){
-	return await authTeacher();
+	return await authTeacher(settings.school_domain);
 })();
 
 console.log("teacher_token", teacher_token); 
