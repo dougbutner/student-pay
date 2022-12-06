@@ -26,7 +26,9 @@ WP_ADMIN_EMAIL=example@gmail.com
 WP_ADMIN_PASSWORD=urpassword123
 ```
 
-Duplicate + modify a [bree job](https://github.com/breejs/bree) starting from `template.mjs` to fit your needs, and test. 
+Ensure you've set up the [JWT Auth plugin](../wordpress-authentication).
+
+Duplicate + modify a [bree job](https://github.com/breejs/bree) starting from `template.js` to fit your needs, and test. Use the `api-test.js` job to troubleshoot connection issues.
 
 Then, uncomment schedules from `server.js` to fit your needs and 
 
@@ -86,6 +88,10 @@ Bio-regeneration - natureknowsbest
 ## Free plugins
 You can set up a L2E system using completely free plugins.
 Learn how to [get your user's Near account into Wordpress the free and easy web 2.0 way](https://www.youtube.com/watch?v=-fHRpTUnQRM), and explore closed- and IRL-school focused manual input options in [teacher-settings.js](teacher-settings.js). 
+
+## Wordpress Authentication
+
+We're using the [JWT Auth](https://wordpress.org/plugins/jwt-auth/) plugin to enable our Node.js build to interact with Wordpress. You'll need to do a bit of [setup](https://wordpress.org/plugins/jwt-auth/#installation) to make it work. This solution brings back an authentication token needed to access the Learndash API and get information about students' progress.
 
 ### METABUILD III Notes
 Working parts: payment scheduler, and full frontend solution [demo](https://tetra.earth/learn2earn)
