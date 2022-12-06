@@ -26,7 +26,7 @@ WP_ADMIN_EMAIL=example@gmail.com
 WP_ADMIN_PASSWORD=urpassword123
 ```
 
-Ensure you've set up the [JWT Auth plugin](../wordpress-authentication).
+Ensure you've set up the [JWT Auth plugin](#wordpress-authentication).
 
 Duplicate + modify a [bree job](https://github.com/breejs/bree) starting from `template.js` to fit your needs, and test. Use the `api-test.js` job to troubleshoot connection issues.
 
@@ -99,6 +99,7 @@ Needed work: finish and test the API connections in the job template `template.m
 Note: A new job must be created from the template.mjs file for each payment type scheduled
 
 > ✨ This repo uses [FRESH Commenting Syntax](https://github.com/dougbutner/FRESH)
+> Dedicated to Sonny Browning, my grandfather and life-teacher who passed on while I was building this repo. 🌞
 
 > WARNING
 > This code isn't (yet) intended to be used on mainnet
