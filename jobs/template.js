@@ -6,6 +6,10 @@ import * as dotenv from 'dotenv'
 import https from 'https';
 import axios from 'axios';
 
+// --- Set up WP Teacher login + Learn 2 Earn Payment Options --- \\ 
+import { authTeacher } from '../teacher-auth.js';
+import * as settings from "../teacher-settings.js";
+
 // --- Near Javascript API --- \\
 //import { KeyPairEd25519, KeyPair, keyStores, connections } from near-api-js;
 import * as nearAPI from "near-api-js";
@@ -15,7 +19,6 @@ const { keyStores, KeyPair, connect, KeyPairEd25519, connections } = nearAPI;
 // --- Set up WP Teacher login + Learn 2 Earn Payment Options --- \\ 
 //import AuthTeacher from ""../teacher-auth.mjs';   
 
-import * as Settings from "teacher-settings";
 
 // --- Implementation using envitonment vatiables TODO web flow --- \\ 
 const myKeyStore = new keyStores.InMemoryKeyStore();
