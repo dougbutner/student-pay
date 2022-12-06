@@ -8,15 +8,16 @@ import axios from 'axios';
 
 
 // --- Set up WP Teacher login + Learn 2 Earn Payment Options --- \\ 
-import AuthTeacher from '../teacher-auth.mjs';
-import * as Settings from '../teacher-settings.mjs';
+import { authTeacher } from '../teacher-auth.js';
+import * as settings from "../teacher-settings.js";
 
 // --- Get teacher authentication token --- \\
 
-const teacher_token = (async () => {
-	return await AuthTeacher();
+const teacher_token = (async function(){
+	return await authTeacher();
 })();
 
+console.log("teacher_token", teacher_token); 
 
 const teacher_jwt = `Basic ${teacher_token}`;
 
@@ -29,11 +30,11 @@ const headers_auth = {
 Example of Quiz Statitics endpoint 
 Docs: https://developers.learndash.com/rest-api/v2/v2-quiz-statistics/
 /*/
-const quiz_wp_url = `${Settings.school_domain}/ldlms/v2/sfwd-quiz`;
-quiz_stats_url = `${Settings.school_domain}/ldlms/v2/sfwd-quiz/1965/statistics`; //TODO finish this 
+const quiz_wp_url = `${settings.school_domain}/ldlms/v2/sfwd-quiz`;
+var quiz_stats_url = `${settings.school_domain}/ldlms/v2/sfwd-quiz/1965/statistics`; //TODO finish this 
 
 function make_quiz_stats_url(quiz_id){
-	quiz_stats_url = `${Settings.school_domain}/ldlms/v2/sfwd-quiz/${quiz_id}/statistics`;
+	quiz_stats_url = `${settings.school_domain}/ldlms/v2/sfwd-quiz/${quiz_id}/statistics`;
   return quiz_stats_url;
 }
 
@@ -53,12 +54,14 @@ console.log(getQuizList(quiz_wp_url, quiz_list_params));
 // --- Get the List of Quizzes --- \\
 async function getQuizList(url, params) {
   try{
-    return await axios.get (
+    await axios.get (
       url,
       params
-    );
+    ).then(function(res){
+			console.log(res);
+		});
 		
-  } catch (err => { console.log(err)})
+  } catch (error){ console.log(error);}
 }//END getQuizList()
 
 // --- Get the Stats of one Quiz --- \\
@@ -68,7 +71,8 @@ async function getQuizStats(url, params) {
       url, 
       params
     );
-    } catch (err => { console.log(err)});
+		
+	} catch (error){ console.log(error);}
 }//END getQuizStats()
 
 
@@ -115,7 +119,7 @@ async function sendStudentPay(student_to_pay = false, amount = 0000000000000000)
       contractId: 'aquatoken.testnet', 
       method: 'transfer_from', 
       args: { "aquatoken.testnet", 
-      owner_id: `${Settings.teacher_near_account}`, 
+      owner_id: `${settings.teacher_near_account}`, 
       new_owner_id: student_to_pay, 
       amount: amount } 
     });

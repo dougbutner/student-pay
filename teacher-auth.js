@@ -8,9 +8,8 @@ axios.post(url, {
   }
 })
 /*/
-import * from 'teacher-settings.mjs';
 import axios from 'axios';
-export default async function AuthTeacher() {
+async function authTeacher(school_domain_endpoint) {
   try {
     const credentials = {
       username: process.env.WP_ADMIN_EMAIL,
@@ -19,7 +18,7 @@ export default async function AuthTeacher() {
     const headers = {
       "Content-Type": "application/json"
     }
-    const getToken = await axios.post(`${Settings.school_domain}/jwt-auth/v1/token`,
+    const getToken = await axios.post(`${school_domain_endpoint}/jwt-auth/v1/token`,
       credentials,
       headers)
     return getToken.data.token
@@ -27,3 +26,5 @@ export default async function AuthTeacher() {
     return console.log('error', error)
   }
 }
+
+export { authTeacher }

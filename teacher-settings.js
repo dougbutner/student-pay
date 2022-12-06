@@ -1,5 +1,6 @@
-// === TEACHER SETTINGS === \\
 
+
+// === TEACHER SETTINGS === \\
 export const existing_studentlist = true; //Set for demo, default is false
 export const studentlist_type = "students"; // 
 export const school_domain = "https://tetra.earth/wp-json"; // API-base according to your WP routing. Do not include ending "/"
@@ -29,7 +30,7 @@ export const teacher_key_type = "private_key"; //REMIND Add PK in .env or in ter
 
 // --- Choose to pay some or all quizzes --- \\
 
-let paying_quizzes = []; // Pays all, else use ["<courseid>"] 
+//export const paying_quizzes = {}; // Pays all, else use ["<courseid>"] 
 
 /*/ About Learndash + NEAR integration
 

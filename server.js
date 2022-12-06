@@ -1,18 +1,27 @@
-const path = require('path');
-const ms = require('ms');
-const dayjs = require('dayjs');
-const Bree = require('bree');
-const express = require('express');
+//const path = require('path');
+import * as path from 'path';
+//const ms = require('ms');
+import * as ms from 'ms';
+//const dayjs = require('dayjs');
+import * as dayjs from 'dayjs'
+import Bree from 'bree';
+
+//const express = require('express');
+import express from 'express';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 const app = express();
 
-require('dotenv').config();
+
 
 const bree = new Bree({
   jobs: [
     
     // --- Status Log for Teacher --- \\
     {
-      name: 'api-test.mjs',
+      name: 'api-test.js',
       timeout: 0
     },
     /*/ --- Quiz Completion Drops --- \\
