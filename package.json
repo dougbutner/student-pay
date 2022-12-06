@@ -5,6 +5,7 @@
   "main": "server.js",
   "author": "Douglas Butner",
   "license": "MIT",
+  "type":"module",
   "scripts": {
     "test": "echo \"No tests yet\" && exit 1",
     "start": "node server.js"
