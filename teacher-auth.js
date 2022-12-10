@@ -20,10 +20,15 @@ async function authTeacher(school_domain_endpoint) {
     }
     const getToken = await axios.post(`${school_domain_endpoint}/jwt-auth/v1/token`,
       credentials,
-      headers)
+      headers);
+      
+      console.log("getToken", getToken);
+      console.log("getToken", getToken.data.token);
     return getToken.data.token
+    
+
   } catch (error) {
-    return console.log('error', error)
+    //return console.log('error', error)
   }
 }
 
